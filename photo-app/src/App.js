@@ -49,7 +49,7 @@ class  App extends Component {
                 <Router>  
                 <div className="main">
                   <nav> 
-                      <ul className="menu">
+                      <ul className="menu" style={{color:'black'}}>
                       <li>
                         <Link to="/" >Home</Link>
                       </li>

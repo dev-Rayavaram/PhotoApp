@@ -6,7 +6,7 @@ class Header extends Component
       render(){
         return (
           <React.Fragment>
-            <h1>Welcome to Phone App</h1>
+            <h1>Photo App</h1>
           </React.Fragment>     
         );
       }
