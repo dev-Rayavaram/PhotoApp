@@ -51,12 +51,12 @@ class  Login extends Component {
         <div className="container">
             <form>
                 <div className="col-8">
-                    <label className="label">Email:</label>
+                    <label className="label" for= "EmailId">Email:</label>
                     <input  className="input" value={this.state.email} onChange={this.handleChange} type="email" name="email"
                     id="EmailId" />
                 </div>
                 <div className="col-8">
-                    <label>Password:</label>
+                    <label for="PasswordId">Password:</label>
                     <input className="input"  value={this.state.password} onChange={this.handleChange} type="password" name="password"
                     id="PasswordId" />
                 </div>

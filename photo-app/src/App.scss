@@ -16,57 +16,6 @@ $container-width: 100%;
   align-content: center;
 }
 
-
-.col-8 {
-  width: $container-width/2;
-  padding: 10px;
-  label{
-    font-size: 25px;
-  }
-}
-.col-4 {
-  width: $container-width / 4;
-}
-a.myAnchor {
-  color: blue;
-  &:hover {
-      text-decoration: underline;
-  }
-  &:visited {
-      color: purple;
-  }
-}
-.input {
-  border-radius: 3px;
-  border: 4px solid #ddd;
-  color: #555;
-  font-size: 17px;
-  padding: 10px 20px;
-  display: inline-block;
-  outline: 0;
-}
-
-.error-input {
-  @extend .input;
-  border:4px solid #e74c3c;
-}
-@mixin media($queryString){
-  @media #{$queryString} {
-    @content;
-  }
-}
-.container {
-  width: ($container-width)-($container-width)/5;
-  margin-top: 15%;
-  margin-left: 15%;
-  justify-content: left;
-  align-content:flex-start;
-  border: 2px solid black;
-  @include media("(max-width: 767px)"){
-      width: 100%;
-  }
-}
-
 .body{
   height:80%;
   width:100%;
@@ -75,11 +24,10 @@ a.myAnchor {
   min-width: 100vh;
   justify-content: center;
   align-content: center;
-
-
 }
 .header,
  .footer{
+   background-color: #878f99;
   display:flex;
   flex-direction:row;
   flex-wrap: wrap;
@@ -96,7 +44,78 @@ a.myAnchor {
   order:2;
   display: flex;
   flex-direction: column;
-  background-color:lightcyan;
+  background-color:#b2ad7f;
   min-width: 100vh;
   width:$container-width;
+}
+@mixin media($queryString){
+  @media #{$queryString} {
+    @content;
+  }
+}
+.container {
+  width: ($container-width)-($container-width)/5;
+  margin-top: 15%;
+  margin-left: 15%;
+
+  border: 2px solid black;
+  @include media("(max-width: 767px)"){
+      width: 100%;
+  }
+}
+.input {
+  border-radius: 3px;
+  border: 4px solid #ddd;
+  color: #555;
+  font-size: 20px;
+  width: $container-width/2;
+  padding: 10px 10px;
+  display: inline-block;
+  outline: 0;
+}
+.col-8 {
+  width: $container-width;
+  padding: 10px;
+  label{
+    font-size: 25px;
+    color: black; font-weight: bold; display: block; width: 150px; float: left; 
+  }
+}
+.col-4 {
+  width: $container-width/4;
+}
+.error-input {
+  @extend .input;
+  border:4px solid #e74c3c;
+}
+
+
+$a-tags: 'a, a:active, a:hover, a:visited';
+$a-tags-hover: 'a:active, a:hover';
+ 
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+  }
+  li {
+    display: inline-flex;
+  }
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+  #{$a-tags} {
+    color: darkblue;
+    text-decoration: none;
+    font-size: x-large;
+    font-weight: bold;
+  }
+  #{$a-tags-hover} {
+    color: purple;
+  }
 }
