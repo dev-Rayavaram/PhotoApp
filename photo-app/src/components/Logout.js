@@ -1,7 +1,7 @@
 import React ,{Component} from 'react'
 import fireauth from '../config/fireauth'
 
-class Home extends Component{
+class Logout extends Component{
     constructor(props){
         super(props)
         this.logout = this.logout.bind(this)
@@ -22,4 +22,4 @@ class Home extends Component{
     }
  
 }
-export default Home;
+export default Logout;

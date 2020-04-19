@@ -6,6 +6,9 @@ import Home from './components/Home'
 import Bookmarks from './components/Bookmarks'
 import UserProfile from './components/UserProfile'
 import Logout from './components/Logout'
+import Footer from './components/Footer.js'
+import Header from './components/Header.js'
+
 
 import {Route,Switch,Link,BrowserRouter as Router} from 'react-router-dom'
 import axios from 'axios';
@@ -37,13 +40,16 @@ class  App extends Component {
   render(){
     return (
       <div className="App">
-        <header className="App-header">
+        <div className="header">
+          <Header/>
+        </div>
+      <div className="body">
           {this.state.user ? 
           (
                 <Router>  
-                <div >
-                  <nav>
-                      <ul>
+                <div className="main">
+                  <nav> 
+                      <ul className="menu">
                       <li>
                         <Link to="/" >Home</Link>
                       </li>
@@ -70,9 +76,20 @@ class  App extends Component {
                   </Switch>
                 </div>
                 </Router>            
-          ):(<Login/>)}
-         </header>
+          ):(
+            <div className="body">
+              <div className="main">
+
+              <Login/>
+              </div>
+            </div>
+          )}
       </div>
+      <div className="footer">
+          <Footer/>
+        </div>
+      </div>
+
     );
   }
  

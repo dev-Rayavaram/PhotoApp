@@ -1,5 +1,7 @@
 import React ,{Component } from 'react';
 import fireauth from '../config/fireauth'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
 
 
 class  Login extends Component {
@@ -46,21 +48,21 @@ class  Login extends Component {
     }
     render(){
       return (
-        <div className="page">
+        <div className="container">
             <form>
-                <div className="row">
-                    <label>Email address:</label>
-                    <input value={this.state.email} onChange={this.handleChange} type="email" name="email"
+                <div className="col-8">
+                    <label className="label">Email:</label>
+                    <input  className="input" value={this.state.email} onChange={this.handleChange} type="email" name="email"
                     id="EmailId" />
                 </div>
-                <div className="row">
+                <div className="col-8">
                     <label>Password:</label>
-                    <input value={this.state.password} onChange={this.handleChange} type="password" name="password"
+                    <input className="input"  value={this.state.password} onChange={this.handleChange} type="password" name="password"
                     id="PasswordId" />
                 </div>
-                <div className="row">
-                    <button type="submit" onClick={this.handleSubmit}> Login</button>
-                    <button  onClick={this.handleSignup}> Signup</button>
+                <div className="col-8">
+                    <Button variant="primary" type="submit" onClick={this.handleSubmit}> Login</Button>
+                    <Button variant="success" onClick={this.handleSignup}> Register</Button>
                 </div>
 
             </form>
