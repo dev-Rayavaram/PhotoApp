@@ -1,5 +1,5 @@
 import React ,{Component} from 'react'
-import fireauth from '../config/fireauth'
+import firebase from '../config/fireauth'
 
 class Logout extends Component{
     constructor(props){
@@ -7,7 +7,7 @@ class Logout extends Component{
         this.logout = this.logout.bind(this)
     }
     logout(){
-        fireauth.auth().signOut().then(function() {
+        firebase.auth().signOut().then(function() {
             // Sign-out successful.
           }).catch(function(error) {
             // An error happened.

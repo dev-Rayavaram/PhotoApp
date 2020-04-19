@@ -1,5 +1,5 @@
 import React ,{Component } from 'react';
-import fireauth from '../config/fireauth'
+import firebase from '../config/fireauth'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 
@@ -17,21 +17,21 @@ class  Login extends Component {
 
     }
     handleSignup(e){
-        // e.preventDefault();
-        // fireauth.auth().createUserWithEmailAndPassword(this.state.email,this.state.password).then(
-        //     (u)=>{
+         e.preventDefault();
+         firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password).then(
+             (u)=>{
 
-        //     }
-        // ).catch(e=>{
-        //     console.log(e)
-        // })
+             }
+         ).catch(e=>{
+             console.log(e)
+         })
     }
     handleChange(e){
         this.setState({[e.target.name]:e.target.value})
     }
     handleSubmit(e){
         e.preventDefault();
-        fireauth.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then(
+        firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then(
             (u)=>{
                 console.log("result",u)
                 if(!("code" in u)== null){
