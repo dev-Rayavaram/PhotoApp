@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import './App.scss';
-import fireauth from './config/fireauth'
+import firebase  from './config/fireauth';
 import Login from './components/Login'
 import Home from './components/Home'
 import Bookmarks from './components/Bookmarks'
 import UserProfile from './components/UserProfile'
+import UploadFile from './components/upload'
+
 import Logout from './components/Logout'
 import Footer from './components/Footer.js'
 import Header from './components/Header.js'
@@ -25,7 +27,7 @@ class  App extends Component {
     this.authListener()
   }
   authListener(){
-    fireauth.auth().onAuthStateChanged((user)=>{
+    firebase.auth().onAuthStateChanged((user)=>{
       console.log(user);
       if(user){
         this.setState({user});
@@ -60,6 +62,9 @@ class  App extends Component {
                         <Link to="/Bookmarks">Bookmarks</Link>
                       </li>
                       <li>
+                        <Link to="/Upload" >Upload Picture</Link>
+                      </li>
+                      <li>
                         <Link to="/Logout" >Logout</Link>
                       </li>
                       </ul>
@@ -71,6 +76,8 @@ class  App extends Component {
                       </Route> 
                       <Route exact path="/Bookmarks" component={Bookmarks}>          
                       </Route> 
+                      <Route exact path="/Upload" component={UploadFile}>          
+                      </Route>             
                       <Route exact path="/Logout" component={Logout}>          
                       </Route>             
                   </Switch>
