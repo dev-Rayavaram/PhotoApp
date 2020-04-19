@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 import './App.scss';
 import firebase  from './config/fireauth';
 import Login from './components/Login'
-import Home from './components/Home'
 import Bookmarks from './components/Bookmarks'
 import UserProfile from './components/UserProfile'
 import UploadFile from './components/upload'
-
+import Users from './components/Users'
 import Logout from './components/Logout'
 import Footer from './components/Footer.js'
 import Header from './components/Header.js'
@@ -53,10 +52,10 @@ class  App extends Component {
                   <nav> 
                       <ul className="menu">
                       <li>
-                        <Link to="/" >Home</Link>
+                        <Link to="/" >User Profile</Link>
                       </li>
                       <li>
-                        <Link to="/UserProfile">User Profile</Link>
+                        <Link to="/Users">Friends</Link>
                       </li>
                       <li>
                         <Link to="/Bookmarks">Bookmarks</Link>
@@ -70,9 +69,9 @@ class  App extends Component {
                       </ul>
                   </nav>
                   <Switch>
-                       <Route exact path="/" component={Home}>          
+                       <Route exact path="/" component={UserProfile}>          
                       </Route> 
-                      <Route exact path="/UserProfile" component={UserProfile}>          
+                      <Route exact path="/Users" component={Users}>          
                       </Route> 
                       <Route exact path="/Bookmarks" component={Bookmarks}>          
                       </Route> 
