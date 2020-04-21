@@ -3,7 +3,6 @@ import firebase from '../config/fireauth'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 
-const database = firebase.database();
 
 class  Login extends Component {
     constructor(props){

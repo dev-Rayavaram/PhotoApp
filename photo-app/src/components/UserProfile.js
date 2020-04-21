@@ -1,5 +1,7 @@
 import React ,{Component} from 'react'
 import firebase,{storage} from '../config/fireauth'
+import defaultImage from '../images/default.jpeg'
+import { Button } from 'react-bootstrap';
 
 class UserProfile extends Component{
     constructor(props){
@@ -88,11 +90,12 @@ class UserProfile extends Component{
     }
     render(){
         if(this.state.isLoaded===true){
+            let imageUrl =(this.state.user.photoURL===null)?defaultImage:this.state.user.photoURL;
             return (
                     <div className="main">
                         <h1>User Profile</h1>
                         <div className="image">
-                            <img src={this.state.user.photoURL} alt="profile" width="150px" height="150px"></img>
+                            <img src={imageUrl} alt="profile" width="150px" height="150px"></img>
                         </div>
                         <div className="container">
                          <form>
@@ -100,15 +103,15 @@ class UserProfile extends Component{
 
                             <div className="col-8">
                                 <label className="label" for= "Name">Name:</label>
-                                <input  type="text" value={this.state.user.displayName}   name="displayName"
+                                <input className="input" type="text" value={this.state.user.displayName}   name="displayName"
                                 id="Name" onChange = {this.handleNameChange} />
                             </div>
                             <div className="col-8">
                                 <label for="email">Email:</label>
-                                <input type="email" value={this.state.user.email} name="email" id="email" onChange = {this.handleEmailChange}  />
+                                <input className="input" type="email" value={this.state.user.email} name="email" id="email" onChange = {this.handleEmailChange}  />
                             </div>
                             <div className="col-8">
-                                <button onClick={this.updateProfile}>Update Profile</button>
+                            <Button variant="primary" onClick={this.updateProfile}>Update Profile</Button>
                             </div>
 
                     </form>
