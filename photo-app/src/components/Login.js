@@ -3,6 +3,7 @@ import firebase from '../config/fireauth'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 
+const database = firebase.database();
 
 class  Login extends Component {
     constructor(props){
@@ -20,7 +21,15 @@ class  Login extends Component {
          e.preventDefault();
          firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password).then(
              (u)=>{
+                    console.log(u)
+                    console.log("u.uid",u.user.uid)
 
+                     firebase.database().ref('/users/' + u.user.uid).set({
+                       username: u.user.email,
+                       email: u.user.email,
+                       profile_picture : '',
+                       displayName:''
+                     });
              }
          ).catch(e=>{
              console.log(e)

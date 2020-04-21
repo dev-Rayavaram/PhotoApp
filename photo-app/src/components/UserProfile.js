@@ -7,12 +7,18 @@ class UserProfile extends Component{
         this.state={
             file:'',
             url:'',
-            user:[],
+            user:{
+                displayName:'',
+                email:''
+            },
             isLoaded:false
 
         }
         this.downloadImages = this.downloadImages.bind(this)
         this.getProfile = this.getProfile.bind(this)
+        this.updateProfile = this.updateProfile.bind(this)
+        this.handleNameChange = this.handleNameChange.bind(this)
+        this.handleEmailChange = this.handleEmailChange.bind(this)
 
     }
     componentDidMount(){
@@ -20,13 +26,35 @@ class UserProfile extends Component{
         this.getProfile()
         this.downloadImages();
     }
+    handleNameChange(event){
+        this.setState({user:{displayName:event.target.value} });
+      //  console.log("event",event);
+        event.preventDefault();
+      }
+      handleEmailChange(event){
+        this.setState({user:{email:event.target.value}});
+      //  console.log("event",event);
+        event.preventDefault();
+      }
     getProfile(){
         const user = firebase.auth().currentUser;
         if (user != null) {
-            this.state.user.push({ displayName:user.displayName,email:user.email,photoURL:user.photoURL,uid:user.uid})
+            this.setState({user:{displayName:user.displayName,email:user.email,photoURL:user.photoURL,uid:user.uid} })
             this.setState({isLoaded:true})
         }
         console.log("this.state.user is:", this.state.user)
+    }
+    updateProfile(e){
+        e.preventDefault();
+        var user = firebase.auth().currentUser;
+        console.log("inside updateProfile")
+        user.updateProfile({
+        displayName: this.state.user.displayName,
+        }).then(function() {
+            console.log("upload successful")
+          }).catch(function(error) {
+            console.log(error)
+          });
     }
     downloadImages(){
         console.log("inside download image")
@@ -59,20 +87,41 @@ class UserProfile extends Component{
 });
     }
     render(){
-        if(this.state.isLoaded===true)
-        return (
-            <div className="main">
-                <div className="image">
-                    <img src={this.state.user.photoURL} width="150px" height="150px"></img>
-                </div>
-                <div className="profile">
-                        <h5>Name :{this.state.user[0].displayName}</h5>
-                        <h5>Email :{this.state.user[0].email}</h5>
-                        <h5>UID :{this.state.user[0].uid}</h5>
+        if(this.state.isLoaded===true){
+            return (
+                    <div className="main">
+                        <h1>User Profile</h1>
+                        <div className="image">
+                            <img src={this.state.user.photoURL} alt="profile" width="150px" height="150px"></img>
+                        </div>
+                        <div className="container">
+                         <form>
+                            <h5>UID :{this.state.user.uid}</h5>
 
+                            <div className="col-8">
+                                <label className="label" for= "Name">Name:</label>
+                                <input  type="text" value={this.state.user.displayName}   name="displayName"
+                                id="Name" onChange = {this.handleNameChange} />
+                            </div>
+                            <div className="col-8">
+                                <label for="email">Email:</label>
+                                <input type="email" value={this.state.user.email} name="email" id="email" onChange = {this.handleEmailChange}  />
+                            </div>
+                            <div className="col-8">
+                                <button onClick={this.updateProfile}>Update Profile</button>
+                            </div>
+
+                    </form>
+
+
+
+
+
+                    </div>
                 </div>
-             </div>
-        )
+            )
+
+        }
         else{
             return (
                 <div className="main">
