@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
+
 $primaryColor: #cccccc;
 body {
     background: $primaryColor;
@@ -48,6 +49,20 @@ $container-width: 100%;
   min-width: 100vh;
   width:$container-width;
 }
+.profile{
+  order:2;
+  display: block;
+}
+.box{
+  width:150px;
+  height:150px
+}
+image{
+  order:1;
+  display: flex;
+  width:100px;
+  height:100px;
+}
 @mixin media($queryString){
   @media #{$queryString} {
     @content;
@@ -55,12 +70,23 @@ $container-width: 100%;
 }
 .container {
   width: ($container-width)-($container-width)/5;
-  margin-top: 15%;
+  margin-top: 0%;
   margin-left: 15%;
-
+  display:grid;
   border: 2px solid black;
   @include media("(max-width: 767px)"){
       width: 100%;
+  }
+}
+.sub-container-1{
+  order: 1;
+}
+.sub-container-2{
+  display:flex;
+  flex-direction: row;
+  image{
+    width:100px;
+    height:100px;
   }
 }
 .input {
@@ -74,7 +100,8 @@ $container-width: 100%;
   outline: 0;
 }
 .col-8 {
-  width: $container-width;
+  width:  ($container-width)-($container-width)/4;
+  margin-left: 20%;
   padding: 10px;
   label{
     font-size: 25px;
