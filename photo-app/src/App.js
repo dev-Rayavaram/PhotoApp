@@ -85,7 +85,7 @@ class  App extends Component {
                         <Link to="/Users">Friends</Link>
                       </li>
                       <li>
-                        <Link to="/Bookmarks">Bookmarks</Link>
+                        <Link  to={{ pathname: '/Bookmarks', state:{images:this.state.images } }} >Bookmarks</Link>
                       </li>
                       <li>
                         <Link to="/Upload" >Upload Picture</Link>
@@ -99,8 +99,11 @@ class  App extends Component {
                        <Route exact path="/" component={UserProfile}>          
                       </Route> 
                       <Route exact path="/Users" component={Users}>          
-                      </Route> 
-                      <Bookmarks images={this.state.images}> </Bookmarks>
+                      </Route>
+                      <Route exact path = "/Bookmarks" component={Bookmarks }>
+
+                      </Route>
+}
                       <Route exact path="/Upload" component={UploadFile}>          
                       </Route>             
                       <Route exact path="/Logout" component={Logout}>          
