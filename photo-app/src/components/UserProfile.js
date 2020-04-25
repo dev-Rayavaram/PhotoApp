@@ -1,5 +1,5 @@
 import React ,{Component} from 'react'
-import firebase,{storage} from '../config/fireauth'
+import firebase from '../config/fireauth'
 import defaultImage from '../images/default.jpeg'
 import { Button } from 'react-bootstrap';
 
@@ -16,7 +16,6 @@ class UserProfile extends Component{
             isLoaded:false
 
         }
-        this.downloadImages = this.downloadImages.bind(this)
         this.getProfile = this.getProfile.bind(this)
         this.updateProfile = this.updateProfile.bind(this)
         this.handleNameChange = this.handleNameChange.bind(this)
@@ -26,7 +25,7 @@ class UserProfile extends Component{
     componentDidMount(){
         console.log("inside component UserProfile didmount")
         this.getProfile()
-        this.downloadImages();
+        //this.downloadImages();
     }
     handleNameChange(event){
         this.setState({user:{displayName:event.target.value} });
@@ -58,38 +57,8 @@ class UserProfile extends Component{
             console.log(error)
           });
     }
-    downloadImages(){
-        console.log("inside download image")
-        const storageRef = storage.ref();
-        var starsRef = storageRef.child('images/connect4-red-image1.png');
-        // Get the download URL
-        starsRef.getDownloadURL().then((url) =>{
-        // Insert url into an <img> tag to "download"
-        console.log("url is",url)
-        this.setState({url:url});
-        console.log("this.state.url",this.state.url)
-        }).catch(function(error) {
-            console.log(error)
-        switch (error.code) {
-            case 'storage/object-not-found':
-            // File doesn't exist
-            break;
-            case 'storage/unauthorized':
-            // User doesn't have permission to access the object
-            break;
-            case 'storage/canceled':
-            // User canceled the upload
-            break;
-            case 'storage/unknown':
-            // Unknown error occurred, inspect the server response
-            break;
-            default:
-                break;
-        }
-});
-    }
     render(){
-        if(this.state.isLoaded===true){
+        if(this.state.isLoaded===true && this.state.user!==null && this.state.user!== undefined){
             let imageUrl =(this.state.user.photoURL===null)?defaultImage:this.state.user.photoURL;
             return (
                     <div className="main">
@@ -99,7 +68,7 @@ class UserProfile extends Component{
                         </div>
                         <div className="container">
                          <form>
-                            <h5>UID :{this.state.user.uid}</h5>
+                            <h5 hidden>UID :{this.state.user.uid}</h5>
 
                             <div className="col-8">
                                 <label className="label" for= "Name">Name:</label>
@@ -117,7 +86,7 @@ class UserProfile extends Component{
                     </form>
 
 
-
+                
 
 
                     </div>
