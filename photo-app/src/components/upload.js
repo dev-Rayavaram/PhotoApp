@@ -24,7 +24,11 @@ class UploadFile extends Component{
           };
         const storageRef = storage.ref();
         var uploadResult = storageRef.child('images/' + image.name).put(image, metadata);
-        console.log("uploadResult",uploadResult)
+       if(uploadResult.state !==null && uploadResult.state ==="success")
+            alert("File uploaded")
+        else
+        alert("uploading failed")
+
     }
     render(){
         return(
