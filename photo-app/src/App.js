@@ -9,17 +9,44 @@ import Users from './components/Users'
 import Logout from './components/Logout'
 import Footer from './components/Footer.js'
 import Header from './components/Header.js'
-
+import image1 from './images/1.png';
+import image2 from './images/2.jpg';
+import image3 from './images/default.jpeg';
+import image4 from './images/4.png';
+import image5 from './images/5.png';
 
 import {Route,Switch,Link,BrowserRouter as Router} from 'react-router-dom'
-import axios from 'axios';
 
 
 class  App extends Component {
   constructor(props){
     super(props);
     this.state={
-      user:{}
+      user:{},
+      images:[
+        {
+            image:image1,
+            liked:0
+        },
+        {
+            image:image2,
+            liked:0
+
+        },
+        {
+             image:image3,
+             liked:0
+
+        },
+        {
+             image:image4,
+             liked:0
+        },
+        {
+            image:image5,
+            liked:0
+
+        }] 
     }
   }
   componentDidMount(){
@@ -73,8 +100,7 @@ class  App extends Component {
                       </Route> 
                       <Route exact path="/Users" component={Users}>          
                       </Route> 
-                      <Route exact path="/Bookmarks" component={Bookmarks}>          
-                      </Route> 
+                      <Bookmarks images={this.state.images}> </Bookmarks>
                       <Route exact path="/Upload" component={UploadFile}>          
                       </Route>             
                       <Route exact path="/Logout" component={Logout}>          
