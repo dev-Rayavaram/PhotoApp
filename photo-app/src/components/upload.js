@@ -32,10 +32,14 @@ class UploadFile extends Component{
     }
     render(){
         return(
-            <div>
-                <input type="file" onChange = {this.handleChange}></input>
-                <button onClick={this.uploadImage}>Upload</button>
-            </div>
+                <div className="main">
+                    <div className="container">
+                        <div className="sub-container-2">
+                            <input type="file" onChange = {this.handleChange}></input>
+                            <button onClick={this.uploadImage}>Upload</button>
+                        </div>
+                    </div>
+                </div>
         )
     }
 }
