@@ -13,6 +13,14 @@ class Bookmarks extends Component{
               images:[],
                 isLoaded:false 
                }
+            this.handleLike=this.handleLike.bind(this);
+            this.handleUnLike=this.handleUnLike.bind(this);
+            }
+            handleUnLike(){
+                alert("unlike clicked")
+            }
+            handleLike(){
+                alert("like clicked")
             }
             componentDidMount(){
                 if(this.props.location.state!==null && this.props.location.state.images !==null && this.props.location.state.images!==undefined)
@@ -43,6 +51,7 @@ class Bookmarks extends Component{
                                             <div>
                                             <p key={index}>Likes:{image.liked}</p>                                        
                                             <button style={{width:"40px" ,height:"40px"}} key={index} variant="primary" onClick={this.handleLike}>Like</button>
+                                            <button style={{width:"40px" ,height:"40px"}} key={index} variant="primary" onClick={this.handleUnLike}>UnLike</button>
 
                                             </div>
                                         </>
