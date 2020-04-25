@@ -11,7 +11,7 @@ import Footer from './components/Footer.js'
 import Header from './components/Header.js'
 import image1 from './images/1.png';
 import image2 from './images/2.jpg';
-import image3 from './images/default.jpeg';
+import image3 from './images/3.png';
 import image4 from './images/4.png';
 import image5 from './images/5.png';
 
