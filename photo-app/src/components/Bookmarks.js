@@ -7,7 +7,11 @@ class Bookmarks extends Component{
             return (
                 <div className="main">
                    <div className="container">
+                   <>
+                       <h3>Your uploaded pictures are</h3>
+                       </>
                    <div className="sub-container-2">
+
                             {
                                 this.props.images.map((image,index)=>{return(
                                     <React.Fragment>
