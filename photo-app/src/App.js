@@ -24,25 +24,25 @@ class  App extends Component {
     this.state={
       user:{},
       images:[
-        {
+        {   id:1,
             image:image1,
             liked:0
         },
-        {
+        {   id:2,
             image:image2,
             liked:0
 
         },
-        {
+        {     id:3,
              image:image3,
              liked:0
 
         },
-        {
+        {   id:4,
              image:image4,
              liked:0
         },
-        {
+        {   id:5,
             image:image5,
             liked:0
 
