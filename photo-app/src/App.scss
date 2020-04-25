@@ -1,7 +1,8 @@
 @import "~bootstrap/scss/bootstrap";
 
-$primaryColor: #cccccc;
-body {
+$primaryColor: #b2ad7f;
+;
+body,html {
     background: $primaryColor;
     justify-content: center;
     align-content: center;
@@ -12,14 +13,15 @@ $container-width: 100%;
 .App {
   text-align: center;
   width: $container-width;
-  background-color:#bbbbbb;
+  background-color:$primaryColor;
   justify-content: center;
   align-content: center;
 }
 
 .body{
   height:80%;
-  width:100%;
+  width: $container-width;
+
   display: flex;
   min-height: 100vh;
   min-width: 100vh;
@@ -39,11 +41,12 @@ $container-width: 100%;
 .menu{
   order:1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 .main{
   order:2;
   display: flex;
+  margin-top: 40px;;
   flex-direction: column;
   background-color:#b2ad7f;
   min-width: 100vh;
@@ -84,6 +87,7 @@ image{
 .sub-container-2{
   display:flex;
   flex-direction: row;
+  flex-wrap: wrap;
   image{
     width:100px;
     height:100px;
@@ -132,7 +136,7 @@ nav {
     display: inline-flex;
   }
   a {
-    display: block;
+    display: inline-flex;
     padding: 6px 12px;
     text-decoration: none;
   }
