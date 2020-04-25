@@ -120,7 +120,8 @@ class UserProfile extends Component{
                       </div>
                       <div className="sub-container-2">
                                 {
-                                    this.state.images.map((image,index)=>{return(
+                                    this.props.images?(
+                                    this.props.images.map((image,index)=>{return(
                                         <React.Fragment>
                                             <>
                                             <caption>Likes:{image.liked}</caption>
@@ -128,9 +129,12 @@ class UserProfile extends Component{
                                                 <img src={image.image} alt="main" style={{width:"250px",height:"250px"}} ></img>
                                             </>
                                          </React.Fragment>
-                                    )})
+                                    )})):
+                                    <React.Fragment>                                        
+                                    </React.Fragment>
  
                                 }
+                                    
                              </div>
 
                 </div>
