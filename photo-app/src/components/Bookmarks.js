@@ -3,7 +3,7 @@ import React ,{Component} from 'react'
 
 class Bookmarks extends Component{
     render(){
-        if(this.props && this.props.images && this.props.images !== undefined){
+        if(this.props.location.state!==null && this.props.location.state.images !==null && this.props.location.state.images!==undefined){
             return (
                 <div className="main">
                    <div className="container">
@@ -13,7 +13,7 @@ class Bookmarks extends Component{
                    <div className="sub-container-2">
 
                             {
-                                this.props.images.map((image,index)=>{return(
+                                this.props.location.state.images.map((image,index)=>{return(
                                     <React.Fragment>
                                         <>
                                         <caption>Likes:{image.liked}</caption>
