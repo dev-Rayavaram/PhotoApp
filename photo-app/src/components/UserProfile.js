@@ -2,6 +2,13 @@ import React ,{Component} from 'react'
 import firebase from '../config/fireauth'
 import defaultImage from '../images/default.jpeg'
 import { Button } from 'react-bootstrap';
+import image1 from '../images/1.png';
+import image2 from '../images/2.jpg';
+import image3 from '../images/default.jpeg';
+import image4 from '../images/4.png';
+import image5 from '../images/5.png';
+
+
 
 class UserProfile extends Component{
     constructor(props){
@@ -13,7 +20,32 @@ class UserProfile extends Component{
                 displayName:'',
                 email:''
             },
-            isLoaded:false
+            isLoaded:false,
+            images:[
+                {
+                    image:image1,
+                    liked:0
+                },
+                {
+                    image:image2,
+                    liked:0
+
+                },
+                {
+                     image:image3,
+                     liked:0
+
+                },
+                {
+                     image:image4,
+                     liked:0
+                },
+                {
+                    image:image5,
+                    liked:0
+
+                }]
+         
 
         }
         this.getProfile = this.getProfile.bind(this)
@@ -60,6 +92,7 @@ class UserProfile extends Component{
     render(){
         if(this.state.isLoaded===true && this.state.user!==null && this.state.user!== undefined){
             let imageUrl =(this.state.user.photoURL===null)?defaultImage:this.state.user.photoURL;
+            console.log("this.state.images is ",this.state.images)
             return (
                     <div className="main">
                         <h1>User Profile</h1>
@@ -67,29 +100,39 @@ class UserProfile extends Component{
                             <img src={imageUrl} alt="profile" width="150px" height="150px"></img>
                         </div>
                         <div className="container">
-                         <form>
-                            <h5 hidden>UID :{this.state.user.uid}</h5>
-
-                            <div className="col-8">
-                                <label className="label" for= "Name">Name:</label>
-                                <input className="input" type="text" value={this.state.user.displayName}   name="displayName"
-                                id="Name" onChange = {this.handleNameChange} />
+                            <div className="sub-container-1">
+                                    <form>
+                                        <h5 hidden>UID :{(this.state.user.uid)?this.state.user.uid:'0'}</h5>
+                                        <div className="col-8">
+                                            <label className="label">Name:</label>
+                                            <input className="input" type="text" value={(this.state.user.displayName)?this.state.user.displayName:'Name'}   name="displayName"
+                                            id="Name" onChange = {this.handleNameChange} />
+                                        </div>
+                                        <div className="col-8">
+                                            <label>Email:</label>
+                                            <input className="input" type="email" value={(this.state.user.email)?this.state.user.email:'email'} name="email" id="email" onChange = {this.handleEmailChange}  />
+                                        </div>
+                                        <div className="col-8">
+                                            <Button variant="primary" onClick={this.updateProfile}>Update Profile</Button>
+                                        </div>
+                                    </form>
                             </div>
-                            <div className="col-8">
-                                <label for="email">Email:</label>
-                                <input className="input" type="email" value={this.state.user.email} name="email" id="email" onChange = {this.handleEmailChange}  />
-                            </div>
-                            <div className="col-8">
-                            <Button variant="primary" onClick={this.updateProfile}>Update Profile</Button>
-                            </div>
+                      </div>
+                      <div className="sub-container-2">
+                                {
+                                    this.state.images.map((image,index)=>{return(
+                                        <React.Fragment>
+                                            <>
+                                            <caption>Likes:{image.liked}</caption>
 
-                    </form>
+                                                <img src={image.image} alt="main" style={{width:"250px",height:"250px"}} ></img>
+                                            </>
+                                         </React.Fragment>
+                                    )})
+ 
+                                }
+                             </div>
 
-
-                
-
-
-                    </div>
                 </div>
             )
 
