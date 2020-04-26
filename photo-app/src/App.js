@@ -85,6 +85,9 @@ class  App extends Component {
 
       let value;
      if(input2===1){
+       console.log("index is ",index)
+       console.log("this.state ",this.state)
+
       value= this.state.images[index].liked+1;
      }
      else if(input2===2){
