@@ -5,7 +5,6 @@ import Login from './components/Login'
 import Bookmarks from './components/Bookmarks'
 import UserProfile from './components/UserProfile'
 import UploadFile from './components/upload'
-import Users from './components/Users'
 import Logout from './components/Logout'
 import Footer from './components/Footer.js'
 import Header from './components/Header.js'
@@ -133,10 +132,7 @@ class  App extends Component {
                       <li>
                         <Link to={{ pathname: '/', state:{topLiked:this.state.topLiked }} }>User Profile </Link>
                       </li>
-                      <li>
-                        <Link to="/Users">Friends</Link>
-                      </li>
-                      <li>
+                       <li>
                         <Link  to={{ pathname: '/Bookmarks', state:{images:this.state.images },props:{prop:this.handle} }} >Bookmarks</Link>
                       </li>
                       <li>
@@ -150,8 +146,6 @@ class  App extends Component {
                   <Switch>
                        <Route exact path="/" component={UserProfile}>          
                       </Route> 
-                      <Route exact path="/Users" component={Users}>          
-                      </Route>
                       <Route exact path = "/Bookmarks" component= {() => <Bookmarks handle={this.handle} state={this.state.images }/>}>
                       </Route>
                       <Route exact path="/Upload" component={UploadFile}>          
