@@ -1,3 +1,4 @@
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
 @import "~bootstrap/scss/bootstrap";
 
 $primaryColor: #b2ad7f;
@@ -74,7 +75,7 @@ image{
 .container {
   width: ($container-width)-($container-width)/5;
   margin-top: 0%;
-  margin-left: 15%;
+  margin-left: 0%;
   display:grid;
   border: 2px solid black;
   @include media("(max-width: 767px)"){
@@ -88,9 +89,15 @@ image{
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
+  
   image{
     width:100px;
     height:100px;
+  }
+  ul {
+    li{
+      list-style: none;
+    }
   }
 }
 .input {
@@ -149,4 +156,20 @@ nav {
   #{$a-tags-hover} {
     color: purple;
   }
+}
+.buttons{
+  width: fit-content;
+  position: relative;
+  left: 30%;
+  background-color:green;
+  color: white;
+  button{
+    font-size: large;
+  }
+}
+.fa {
+  padding: 0px;
+  font-size: 40px;
+  width: 50px;
+
 }
