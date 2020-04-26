@@ -1,4 +1,5 @@
 import React ,{Component} from 'react'
+
 // import image1 from '../images/1.png';
 // import image2 from '../images/2.jpg';
 // import image3 from '../images/3.png';
@@ -18,18 +19,16 @@ class Bookmarks extends Component{
     }
     handleUnLike(e){
         e.preventDefault();
-        let id = e.target.value
-        // alert(e.target.value)
-        //we have to use == because index is number and e.target.value is a string
-        var index = this.state.images.findIndex(x=> x.id == id);
+        let idStr = e.target.value
+        let id = parseInt(idStr);
+        var index = this.state.images.findIndex(x=> x.id === id);
           this.props.handle(index,2);
     }
     handleLike(e){
         e.preventDefault();
-        // alert(e.target.value)
-        let id = e.target.value
-            //we have to use == because index is number and e.target.value is a string               
-        var index = this.state.images.findIndex(x=> x.id == id);
+        let idStr = e.target.value
+        let id = parseInt(idStr);
+        var index = this.state.images.findIndex(x=> x.id === id);
          this.props.handle(index,1);
     }
     componentDidMount(){
@@ -58,10 +57,10 @@ class Bookmarks extends Component{
                                         <ul>
                                             <li>
                                                 <img  src={image.image} alt="main" style={{width:"250px",height:"250px"}} ></img>
-                                                <div>
+                                                <div className="buttons">
                                                     <p >Likes:{image.liked}</p>                                        
-                                                    <button style={{width:"40px" ,height:"40px"}} variant="primary" value={image.id} onClick={this.handleLike}>Like</button>
-                                                    <button style={{width:"40px" ,height:"40px"}}  variant="primary" value={image.id} onClick={this.handleUnLike}>UnLike</button>
+                                                    <button className="fa fa-thumbs-up" style={{width:"40px" ,height:"40px"}} variant="primary" value={image.id} onClick={this.handleLike}>I </button>
+                                                    <button className="fa fa-thumbs-down" style={{width:"40px" ,height:"40px"}}  variant="primary" value={image.id} onClick={this.handleUnLike}>I </button>
                                                 </div>
 
                                             </li>
