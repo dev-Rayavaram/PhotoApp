@@ -11,11 +11,11 @@ class UserProfile extends Component{
             url:'',
             user:{
                 displayName:'',
-                email:''
+                email:'',
+                photoURL:defaultImage
             },
             topLikedPicture:'',
-            isLoaded:false,
- 
+            isLoaded:false 
         }
         this.getProfile = this.getProfile.bind(this)
         this.updateProfile = this.updateProfile.bind(this)
@@ -23,29 +23,36 @@ class UserProfile extends Component{
         this.handleEmailChange = this.handleEmailChange.bind(this)
 
     }
-    componentDidMount(){
-       // console.log("inside component UserProfile didmount")
-        this.getProfile()
-        if(this.props.location.state !==null && this.props.location.state!==undefined){
-            this.setState({topLikedPicture:this.props.location.state.topLiked})
-        }
+    async componentDidMount(){
+        console.log("inside component UserProfile didmount")
+        await this.getProfile()
        // console.log("this.state.topLikedPicture",this.state.topLikedPicture)
     }
+
     handleNameChange(event){
-        this.setState({user:{displayName:event.target.value} });
-      //  console.log("event",event);
         event.preventDefault();
+        console.log(this.state)
+        this.setState({user:{displayName:event.target.value,email:this.state.user.email,photoURL:this.state.user.photoURL,uid:this.state.user.uid} });
       }
       handleEmailChange(event){
-        this.setState({user:{email:event.target.value}});
-      //  console.log("event",event);
+        this.setState({user:{displayName:this.state.user.displayName,email:event.target.value,photoURL:this.state.user.photoURL,uid:this.state.user.uid}});
         event.preventDefault();
       }
-    getProfile(){
-        const user = firebase.auth().currentUser;
+     async getProfile(){
+        const user = await firebase.auth().currentUser;
+
         if (user != null) {
+
             this.setState({user:{displayName:user.displayName,email:user.email,photoURL:user.photoURL,uid:user.uid} })
             this.setState({isLoaded:true})
+            if(this.props.location.state !==null && this.props.location.state!==undefined){   
+                this.setState({topLikedPicture:this.props.location.state.topLiked})
+    
+            }
+            
+        }
+        else{
+            this.props.history.push('/Bookmarks')
         }
        // console.log("this.state.user is:", this.state.user)
     }
