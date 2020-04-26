@@ -66,8 +66,11 @@ class  App extends Component {
           }
       }
       let topImageIndex = this.state.images.findIndex(x=> x.id === maxId);
-      let topImage = this.state.images[topImageIndex]
-      this.setState({topLiked:topImage.image})
+      if(topImageIndex>=0){
+          let topImage = this.state.images[topImageIndex]
+          this.setState({topLiked:topImage.image})
+  
+      }
     }
   //calling method in setState is to handle async setState results
   //https://www.freecodecamp.org/news/get-pro-with-react-setstate-in-10-minutes-d38251d1c781/
@@ -86,6 +89,7 @@ class  App extends Component {
      }
      else if(input2===2){
       value= this.state.images[index].liked-1;
+      value=(value<0)?0:value
      }
       let newObject= {id:this.state.images[index].id,image:this.state.images[index].image,liked:value}
       this.setState({
