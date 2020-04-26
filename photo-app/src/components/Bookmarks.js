@@ -15,60 +15,62 @@ class Bookmarks extends Component{
                }
             this.handleLike=this.handleLike.bind(this);
             this.handleUnLike=this.handleUnLike.bind(this);
+    }
+    handleUnLike(e){
+        e.preventDefault();
+        let id = e.target.value
+        alert(e.target.value)
+        //we have to use == because index is number and e.target.value is a string
+        var index = this.state.images.findIndex(x=> x.id == id);
+        let value = this.state.images[index].liked-1;
+        console.log("value",value)
+        //fixed setting state of an array element by following instructions from stackoverflow
+        //https://stackoverflow.com/questions/29537299/react-how-to-update-state-item1-in-state-using-setstate
+            if(index!==-1)
+            {
+                let newObject= {id:this.state.images[index].id,image:this.state.images[index].image,liked:value}
+                console.log("sliced",this.state.images[index])
+                this.setState({
+                    images: [
+                    ...this.state.images.slice(0,index),newObject,
+                    ...this.state.images.slice(index+1)
+                    ]
+                }); 
+
+        }
+        console.log(this.state.images)
+        this.props.handle(id,2);
+
+    }
+    handleLike(e){
+        e.preventDefault();
+        alert(e.target.value)
+        let id = e.target.value
+            //we have to use == because index is number and e.target.value is a string               
+        var index = this.state.images.findIndex(x=> x.id == id);
+        let value = this.state.images[index].liked+1;
+        if (index !== -1){
+                let newObject= {id:this.state.images[index].id,image:this.state.images[index].image,liked:value}
+                this.setState({
+                    images: [
+                    ...this.state.images.slice(0,index),newObject,
+                    ...this.state.images.slice(index+1)
+                    ]
+                });        
+        }
+        this.props.handle(id,1);
+    }
+    componentDidMount(){
+        console.log("this.props componentDidMount Bookmarks")
+        console.log(this.props)
+        if(this.props.state!==null && this.props.state!==undefined)
+            {
+                Object.values(this.props.state).map((item,index)=>
+                    this.state.images.push(item)
+                )  
+                this.setState({isLoaded:true})
             }
-                    handleUnLike(e){
-                e.preventDefault();
-                let id = e.target.value
-                alert(e.target.value)
-                //we have to use == because index is number and e.target.value is a string
-                var index = this.state.images.findIndex(x=> x.id == id);
-                let value = this.state.images[index].liked-1;
-                console.log("value",value)
-                //fixed setting state of an array element by following instructions from stackoverflow
-                //https://stackoverflow.com/questions/29537299/react-how-to-update-state-item1-in-state-using-setstate
-                    if(index!==-1)
-                    {
-                        let newObject= {id:this.state.images[index].id,image:this.state.images[index].image,liked:value}
-                        console.log("sliced",this.state.images[index])
-                        this.setState({
-                            images: [
-                            ...this.state.images.slice(0,index),newObject,
-                            ...this.state.images.slice(index+1)
-                            ]
-                        }); 
-    
-                }
-                 console.log(this.state.images)
-            }
-            handleLike(e){
-                e.preventDefault();
-                alert(e.target.value)
-                let id = e.target.value
-                 //we have to use == because index is number and e.target.value is a string               
-                var index = this.state.images.findIndex(x=> x.id == id);
-                let value = this.state.images[index].liked+1;
-                if (index !== -1){
-                        let newObject= {id:this.state.images[index].id,image:this.state.images[index].image,liked:value}
-                        this.setState({
-                            images: [
-                            ...this.state.images.slice(0,index),newObject,
-                            ...this.state.images.slice(index+1)
-                            ]
-                        });        
-                }
-                 console.log(this.state.images)
-               
-            }
-            componentDidMount(){
-                if(this.props.location.state!==null && this.props.location.state.images !==null && this.props.location.state.images!==undefined)
-                    {
-                        Object.values(this.props.location.state.images).map((item,index)=>
-                           this.state.images.push(item)
-                        )  
-                        this.setState({isLoaded:true})
-                    }
-                console.log("inside componentDidMount ",this.state.images)
-            }
+    }
     render(){
         if(this.state.isLoaded && this.state.images!==null &&this.state.images!== undefined){
             return (

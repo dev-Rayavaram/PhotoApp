@@ -45,12 +45,16 @@ class  App extends Component {
         {   id:5,
             image:image5,
             liked:0
-
         }] 
     }
+    this.handle=this.handle.bind(this)
   }
   componentDidMount(){
     this.authListener()
+  }
+  handle=(input,input2)=>{
+      alert("GOT YOU")
+      console.log("input 1 input 2",input,input2)
   }
   authListener(){
     firebase.auth().onAuthStateChanged((user)=>{
@@ -85,7 +89,7 @@ class  App extends Component {
                         <Link to="/Users">Friends</Link>
                       </li>
                       <li>
-                        <Link  to={{ pathname: '/Bookmarks', state:{images:this.state.images } }} >Bookmarks</Link>
+                        <Link  to={{ pathname: '/Bookmarks', state:{images:this.state.images },props:{prop:this.handle} }} >Bookmarks</Link>
                       </li>
                       <li>
                         <Link to="/Upload" >Upload Picture</Link>
@@ -100,10 +104,8 @@ class  App extends Component {
                       </Route> 
                       <Route exact path="/Users" component={Users}>          
                       </Route>
-                      <Route exact path = "/Bookmarks" component={Bookmarks }>
-
+                      <Route exact path = "/Bookmarks" component= {() => <Bookmarks handle={this.handle} state={this.state.images }/>}>
                       </Route>
-}
                       <Route exact path="/Upload" component={UploadFile}>          
                       </Route>             
                       <Route exact path="/Logout" component={Logout}>          
