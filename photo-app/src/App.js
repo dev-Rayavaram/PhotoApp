@@ -52,10 +52,32 @@ class  App extends Component {
   componentDidMount(){
     this.authListener()
   }
-  handle=(input,input2)=>{
-      alert("GOT YOU")
-      console.log("input 1 input 2",input,input2)
-  }
+  //handle for like unlike by comparing input2, 
+  //if input2 is 1 handle like else if it is 2 handle unlike
+  //input is id input2 is method type
+  //fixed setting state of an array element by following instructions from stackoverflow
+//https://stackoverflow.com/questions/29537299/react-how-to-update-state-item1-in-state-using-setstate
+
+  handle=(index,input2)=>{
+    console.log("handle before change",this.state.images)
+
+      let value;
+     if(input2===1){
+      value= this.state.images[index].liked+1;
+     }
+     else if(input2===2){
+      value= this.state.images[index].liked-1;
+     }
+      let newObject= {id:this.state.images[index].id,image:this.state.images[index].image,liked:value}
+      this.setState({
+          images: [
+          ...this.state.images.slice(0,index),newObject,
+          ...this.state.images.slice(index+1)
+          ]
+      }); 
+      console.log("handle changes",this.state.images)
+     }
+  
   authListener(){
     firebase.auth().onAuthStateChanged((user)=>{
       console.log(user);

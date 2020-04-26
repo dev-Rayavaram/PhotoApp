@@ -19,46 +19,20 @@ class Bookmarks extends Component{
     handleUnLike(e){
         e.preventDefault();
         let id = e.target.value
-        alert(e.target.value)
+        // alert(e.target.value)
         //we have to use == because index is number and e.target.value is a string
         var index = this.state.images.findIndex(x=> x.id == id);
         let value = this.state.images[index].liked-1;
         console.log("value",value)
-        //fixed setting state of an array element by following instructions from stackoverflow
-        //https://stackoverflow.com/questions/29537299/react-how-to-update-state-item1-in-state-using-setstate
-            if(index!==-1)
-            {
-                let newObject= {id:this.state.images[index].id,image:this.state.images[index].image,liked:value}
-                console.log("sliced",this.state.images[index])
-                this.setState({
-                    images: [
-                    ...this.state.images.slice(0,index),newObject,
-                    ...this.state.images.slice(index+1)
-                    ]
-                }); 
-
-        }
-        console.log(this.state.images)
-        this.props.handle(id,2);
-
+          this.props.handle(index,2);
     }
     handleLike(e){
         e.preventDefault();
-        alert(e.target.value)
+        // alert(e.target.value)
         let id = e.target.value
             //we have to use == because index is number and e.target.value is a string               
         var index = this.state.images.findIndex(x=> x.id == id);
-        let value = this.state.images[index].liked+1;
-        if (index !== -1){
-                let newObject= {id:this.state.images[index].id,image:this.state.images[index].image,liked:value}
-                this.setState({
-                    images: [
-                    ...this.state.images.slice(0,index),newObject,
-                    ...this.state.images.slice(index+1)
-                    ]
-                });        
-        }
-        this.props.handle(id,1);
+         this.props.handle(index,1);
     }
     componentDidMount(){
         console.log("this.props componentDidMount Bookmarks")
