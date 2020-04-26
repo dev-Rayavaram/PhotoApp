@@ -16,11 +16,48 @@ class Bookmarks extends Component{
             this.handleLike=this.handleLike.bind(this);
             this.handleUnLike=this.handleUnLike.bind(this);
             }
-            handleUnLike(){
-                alert("unlike clicked")
+                    handleUnLike(e){
+                e.preventDefault();
+                let id = e.target.value
+                alert(e.target.value)
+                //we have to use == because index is number and e.target.value is a string
+                var index = this.state.images.findIndex(x=> x.id == id);
+                let value = this.state.images[index].liked-1;
+                console.log("value",value)
+                //fixed setting state of an array element by following instructions from stackoverflow
+                //https://stackoverflow.com/questions/29537299/react-how-to-update-state-item1-in-state-using-setstate
+                    if(index!==-1)
+                    {
+                        let newObject= {id:this.state.images[index].id,image:this.state.images[index].image,liked:value}
+                        console.log("sliced",this.state.images[index])
+                        this.setState({
+                            images: [
+                            ...this.state.images.slice(0,index),newObject,
+                            ...this.state.images.slice(index+1)
+                            ]
+                        }); 
+    
+                }
+                 console.log(this.state.images)
             }
-            handleLike(){
-                alert("like clicked")
+            handleLike(e){
+                e.preventDefault();
+                alert(e.target.value)
+                let id = e.target.value
+                 //we have to use == because index is number and e.target.value is a string               
+                var index = this.state.images.findIndex(x=> x.id == id);
+                let value = this.state.images[index].liked+1;
+                if (index !== -1){
+                        let newObject= {id:this.state.images[index].id,image:this.state.images[index].image,liked:value}
+                        this.setState({
+                            images: [
+                            ...this.state.images.slice(0,index),newObject,
+                            ...this.state.images.slice(index+1)
+                            ]
+                        });        
+                }
+                 console.log(this.state.images)
+               
             }
             componentDidMount(){
                 if(this.props.location.state!==null && this.props.location.state.images !==null && this.props.location.state.images!==undefined)
@@ -33,7 +70,7 @@ class Bookmarks extends Component{
                 console.log("inside componentDidMount ",this.state.images)
             }
     render(){
-        if(this.state.isLoaded){
+        if(this.state.isLoaded && this.state.images!==null &&this.state.images!== undefined){
             return (
                 <div className="main">
                    <div className="container">
@@ -41,20 +78,20 @@ class Bookmarks extends Component{
                        <h3>Your uploaded pictures are</h3>
                        </>
                    <div className="sub-container-2">
-
                             {
-                                this.state.images.map((image,index)=>{return(
+                                this.state.images.map((image)=>{return(
                                     <React.Fragment>
-                                        <>
-    
-                                            <img  key={index} src={image.image} alt="main" style={{width:"250px",height:"250px"}} ></img>
-                                            <div>
-                                            <p key={index}>Likes:{image.liked}</p>                                        
-                                            <button style={{width:"40px" ,height:"40px"}} key={index} variant="primary" onClick={this.handleLike}>Like</button>
-                                            <button style={{width:"40px" ,height:"40px"}} key={index} variant="primary" onClick={this.handleUnLike}>UnLike</button>
+                                        <ul>
+                                            <li>
+                                                <img  src={image.image} alt="main" style={{width:"250px",height:"250px"}} ></img>
+                                                <div>
+                                                    <p >Likes:{image.liked}</p>                                        
+                                                    <button style={{width:"40px" ,height:"40px"}} variant="primary" value={image.id} onClick={this.handleLike}>Like</button>
+                                                    <button style={{width:"40px" ,height:"40px"}}  variant="primary" value={image.id} onClick={this.handleUnLike}>UnLike</button>
+                                                </div>
 
-                                            </div>
-                                        </>
+                                            </li>
+                                         </ul>
                                         </React.Fragment>
                                 )})
                             }
