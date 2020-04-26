@@ -81,12 +81,12 @@ class UserProfile extends Component{
                                         <h5 hidden>UID :{(this.state.user.uid)?this.state.user.uid:'0'}</h5>
                                         <div className="col-8">
                                             <label className="label">Name:</label>
-                                            <input className="input" type="text" value={(this.state.user.displayName)?this.state.user.displayName:'Name'}   name="displayName"
+                                            <input className="input" type="text" value={this.state.user.displayName}   name="displayName"
                                             id="Name" onChange = {this.handleNameChange} />
                                         </div>
                                         <div className="col-8">
                                             <label>Email:</label>
-                                            <input className="input" type="email" value={(this.state.user.email)?this.state.user.email:'email'} name="email" id="email" onChange = {this.handleEmailChange}  />
+                                            <input className="input" type="email" value={this.state.user.email} name="email" id="email" onChange = {this.handleEmailChange}  />
                                         </div>
                                         <div className="col-8">
                                             <Button variant="primary" onClick={this.updateProfile}>Update Profile</Button>
