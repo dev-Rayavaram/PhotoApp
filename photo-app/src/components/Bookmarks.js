@@ -22,8 +22,6 @@ class Bookmarks extends Component{
         // alert(e.target.value)
         //we have to use == because index is number and e.target.value is a string
         var index = this.state.images.findIndex(x=> x.id == id);
-        let value = this.state.images[index].liked-1;
-        console.log("value",value)
           this.props.handle(index,2);
     }
     handleLike(e){
@@ -35,8 +33,8 @@ class Bookmarks extends Component{
          this.props.handle(index,1);
     }
     componentDidMount(){
-        console.log("this.props componentDidMount Bookmarks")
-        console.log(this.props)
+      //  console.log("this.props componentDidMount Bookmarks")
+       // console.log(this.props)
         if(this.props.state!==null && this.props.state!==undefined)
             {
                 Object.values(this.props.state).map((item,index)=>
