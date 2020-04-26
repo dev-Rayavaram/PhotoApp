@@ -105,14 +105,14 @@ class  App extends Component {
   
   authListener(){
     firebase.auth().onAuthStateChanged((user)=>{
-      console.log(user);
+      //console.log(user);
       if(user){
         this.setState({user});
-        localStorage.setItem('user',user.uid)
+        localStorage.setItem('user-data',user)
       }
       else{
         this.setState({user:null});
-        localStorage.removeItem('user',user.uid)
+        localStorage.removeItem('user-data',user)
       }
     })
   }
@@ -144,14 +144,15 @@ class  App extends Component {
                       </ul>
                   </nav>
                   <Switch>
-                       <Route exact path="/" component={UserProfile}>          
+                      <Route exact path="/" component={UserProfile}>          
                       </Route> 
-                      <Route exact path = "/Bookmarks" component= {() => <Bookmarks handle={this.handle} state={this.state.images }/>}>
+                       <Route exact path = "/Bookmarks" component= {() => <Bookmarks handle={this.handle} state={this.state.images }/>}>
                       </Route>
                       <Route exact path="/Upload" component={UploadFile}>          
                       </Route>             
                       <Route exact path="/Logout" component={Logout}>          
-                      </Route>             
+                      </Route>
+              
                   </Switch>
                 </div>
                 </Router>            
