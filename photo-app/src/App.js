@@ -45,13 +45,35 @@ class  App extends Component {
         {   id:5,
             image:image5,
             liked:0
-        }] 
+        }],
+        topLiked:'' 
     }
     this.handle=this.handle.bind(this)
+    this.handleTopRanked = this.handleTopRanked.bind(this)
   }
   componentDidMount(){
     this.authListener()
   }
+  handleTopRanked(){
+      alert("who is top")
+      let max=0;
+      let maxId =0
+      for(let image of this.state.images){
+          console.log("image comparing",image)
+          if(image.liked>max){
+            maxId = image.id
+            max=image.liked
+          }
+          else{
+            maxId = maxId;
+          }
+      }
+      let topImage = this.state.images[maxId];
+      this.setState({topLiked:topImage.image})
+      console.log("top liked",this.state.topLiked)
+    }
+  //calling method in setState is to handle async setState results
+  //https://www.freecodecamp.org/news/get-pro-with-react-setstate-in-10-minutes-d38251d1c781/
   //handle for like unlike by comparing input2, 
   //if input2 is 1 handle like else if it is 2 handle unlike
   //input is id input2 is method type
@@ -74,7 +96,7 @@ class  App extends Component {
           ...this.state.images.slice(0,index),newObject,
           ...this.state.images.slice(index+1)
           ]
-      }); 
+      },()=>{this.handleTopRanked()}); 
       console.log("handle changes",this.state.images)
      }
   
@@ -105,7 +127,7 @@ class  App extends Component {
                   <nav> 
                       <ul className="menu">
                       <li>
-                        <Link to="/" >User Profile</Link>
+                        <Link to={{ pathname: '/', state:{topLiked:this.state.topLiked }} }>User Profile </Link>
                       </li>
                       <li>
                         <Link to="/Users">Friends</Link>

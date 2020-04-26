@@ -2,13 +2,6 @@ import React ,{Component} from 'react'
 import firebase from '../config/fireauth'
 import defaultImage from '../images/default.jpeg'
 import { Button } from 'react-bootstrap';
-import image1 from '../images/1.png';
-import image2 from '../images/2.jpg';
-import image3 from '../images/default.jpeg';
-import image4 from '../images/4.png';
-import image5 from '../images/5.png';
-
-
 
 class UserProfile extends Component{
     constructor(props){
@@ -20,33 +13,9 @@ class UserProfile extends Component{
                 displayName:'',
                 email:''
             },
+            topLikedPicture:'',
             isLoaded:false,
-            images:[
-                {
-                    image:image1,
-                    liked:0
-                },
-                {
-                    image:image2,
-                    liked:0
-
-                },
-                {
-                     image:image3,
-                     liked:0
-
-                },
-                {
-                     image:image4,
-                     liked:0
-                },
-                {
-                    image:image5,
-                    liked:0
-
-                }]
-         
-
+ 
         }
         this.getProfile = this.getProfile.bind(this)
         this.updateProfile = this.updateProfile.bind(this)
@@ -57,7 +26,10 @@ class UserProfile extends Component{
     componentDidMount(){
         console.log("inside component UserProfile didmount")
         this.getProfile()
-        //this.downloadImages();
+        if(this.props.location.state !==null && this.props.location.state!==undefined){
+            this.setState({topLikedPicture:this.props.location.state.topLiked})
+        }
+        console.log("this.state.topLikedPicture",this.state.topLikedPicture)
     }
     handleNameChange(event){
         this.setState({user:{displayName:event.target.value} });
@@ -99,6 +71,10 @@ class UserProfile extends Component{
                         <div className="image">
                             <img src={imageUrl} alt="profile" width="150px" height="150px"></img>
                         </div>
+                        <h3>Your most liked picture is</h3>
+                        <div className="image">
+                            <img src={(this.state.topLikedPicture)?this.state.topLikedPicture:imageUrl} alt="profile" width="150px" height="150px"></img>
+                        </div>                       
                         <div className="container">
                             <div className="sub-container-1">
                                     <form>
