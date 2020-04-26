@@ -24,12 +24,12 @@ class UserProfile extends Component{
 
     }
     componentDidMount(){
-        console.log("inside component UserProfile didmount")
+       // console.log("inside component UserProfile didmount")
         this.getProfile()
         if(this.props.location.state !==null && this.props.location.state!==undefined){
             this.setState({topLikedPicture:this.props.location.state.topLiked})
         }
-        console.log("this.state.topLikedPicture",this.state.topLikedPicture)
+       // console.log("this.state.topLikedPicture",this.state.topLikedPicture)
     }
     handleNameChange(event){
         this.setState({user:{displayName:event.target.value} });
@@ -47,16 +47,16 @@ class UserProfile extends Component{
             this.setState({user:{displayName:user.displayName,email:user.email,photoURL:user.photoURL,uid:user.uid} })
             this.setState({isLoaded:true})
         }
-        console.log("this.state.user is:", this.state.user)
+       // console.log("this.state.user is:", this.state.user)
     }
     updateProfile(e){
         e.preventDefault();
         var user = firebase.auth().currentUser;
-        console.log("inside updateProfile")
+       // console.log("inside updateProfile")
         user.updateProfile({
         displayName: this.state.user.displayName,
         }).then(function() {
-            console.log("upload successful")
+          //  console.log("upload successful")
           }).catch(function(error) {
             console.log(error)
           });
@@ -64,7 +64,7 @@ class UserProfile extends Component{
     render(){
         if(this.state.isLoaded===true && this.state.user!==null && this.state.user!== undefined){
             let imageUrl =(this.state.user.photoURL===null)?defaultImage:this.state.user.photoURL;
-            console.log("this.state.images is ",this.state.images)
+          //  console.log("this.state.images is ",this.state.images)
             return (
                     <div className="main">
                         <h1>User Profile</h1>
