@@ -55,22 +55,19 @@ class  App extends Component {
     this.authListener()
   }
   handleTopRanked(){
-      alert("who is top")
       let max=0;
       let maxId =0
       for(let image of this.state.images){
-          console.log("image comparing",image)
           if(image.liked>max){
             maxId = image.id
             max=image.liked
           }
           else{
-            maxId = maxId;
           }
       }
-      let topImage = this.state.images[maxId];
+      let topImageIndex = this.state.images.findIndex(x=> x.id === maxId);
+      let topImage = this.state.images[topImageIndex]
       this.setState({topLiked:topImage.image})
-      console.log("top liked",this.state.topLiked)
     }
   //calling method in setState is to handle async setState results
   //https://www.freecodecamp.org/news/get-pro-with-react-setstate-in-10-minutes-d38251d1c781/
@@ -81,7 +78,7 @@ class  App extends Component {
 //https://stackoverflow.com/questions/29537299/react-how-to-update-state-item1-in-state-using-setstate
 
   handle=(index,input2)=>{
-    console.log("handle before change",this.state.images)
+    //console.log("handle before change",this.state.images)
 
       let value;
      if(input2===1){
@@ -97,7 +94,7 @@ class  App extends Component {
           ...this.state.images.slice(index+1)
           ]
       },()=>{this.handleTopRanked()}); 
-      console.log("handle changes",this.state.images)
+    //  console.log("handle changes",this.state.images)
      }
   
   authListener(){
