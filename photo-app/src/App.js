@@ -35,9 +35,24 @@ import {Route,Switch,Link,BrowserRouter as Router} from 'react-router-dom'
     implement lifecycle method render
       procedure render
         IF user exists
-          render child components using routing
+          render child components using routing by sending state as props
         ELSE
-          redirect to login page        
+          redirect to login page  
+          
+    implementation for handle a button handler for child component
+          procedure handle
+              IF input equals 1 
+                  increase like by 1, and set liked for corresponding image object
+              ELSE input equals 2
+                  decrease like by 1, and change liked value for that image object
+          END procedure
+
+        implementation for handleTopRanked method
+            loop all image objects 
+                find object that has maximum liked value
+                    set topLiked state
+        send topLiked to UserProfile component as a prop 
+                    
 */
 
 class  App extends Component {
