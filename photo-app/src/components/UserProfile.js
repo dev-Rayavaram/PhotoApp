@@ -27,7 +27,7 @@ class UserProfile extends Component{
     async componentDidMount(){
        // console.log("inside component UserProfile didmount")
         await this.getProfile();
-        if(this.props.location.state.images){ 
+        if(this.props.location.state && this.props.location.state.images){ 
             this.props.location.state.images.sort((a,b)=>(a.liked<b.liked)?1:-1)
             this.props.location.state.images.map((item)=>this.state.likedList.push(item))
 
@@ -63,7 +63,7 @@ class UserProfile extends Component{
         user.updateProfile({
         displayName: this.state.user.displayName,
         }).then(function() {
-          //  console.log("upload successful")
+            alert("profile updated")
           }).catch(function(error) {
             console.log(error)
           });
