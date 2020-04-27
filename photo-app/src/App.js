@@ -5,6 +5,7 @@ import Login from './components/Login'
 import Bookmarks from './components/Bookmarks'
 import UserProfile from './components/UserProfile'
 import UploadFile from './components/upload'
+import Users from './components/Users'
 import Logout from './components/Logout'
 import Footer from './components/Footer.js'
 import Header from './components/Header.js'
@@ -177,6 +178,10 @@ class  App extends Component {
                         <Link to="/Upload" >Upload Picture</Link>
                       </li>
                       <li>
+                        <Link to="/Users" >Users</Link>
+                      </li>
+
+                      <li>
                         <Link to="/Logout" >Logout</Link>
                       </li>
                       </ul>
@@ -187,7 +192,10 @@ class  App extends Component {
                        <Route exact path = "/Bookmarks" component= {() => <Bookmarks handle={this.handle} state={this.state.images }/>}>
                       </Route>
                       <Route exact path="/Upload" component={UploadFile}>          
+                      </Route> 
+                      <Route exact path="/Users" component={Users}>          
                       </Route>             
+            
                       <Route exact path="/Logout" component={Logout}>          
                       </Route>
               
