@@ -29,7 +29,15 @@ import {Route,Switch,Link,BrowserRouter as Router} from 'react-router-dom'
     initialize user, images topLiked variables
     bind handle,handleTopRanked methods to this
     implement lifecycle method componentDidMount
- 
+        inside componentDidMount
+        call authListener
+    in authListener IF authenticated set state for user
+    implement lifecycle method render
+      procedure render
+        IF user exists
+          render child components using routing
+        ELSE
+          redirect to login page        
 */
 
 class  App extends Component {
