@@ -19,7 +19,6 @@ $container-width: 100%;
 .body{
   height:80%;
   width: $container-width;
-
   display: flex;
   min-height: 100vh;
   min-width: 100vh;
@@ -77,6 +76,11 @@ image{
   border: 2px solid black;
   @include media("(max-width: 767px)"){
       width: 100%;
+  }
+  ul{
+    li{
+      list-style: none;
+    }
   }
 }
 .sub-container-1{
