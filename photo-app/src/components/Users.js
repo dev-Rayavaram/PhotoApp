@@ -6,29 +6,32 @@ class Users extends Component{
     constructor(props){
         super(props)
         this.state={
-            users:[],
             currentUser:[],
+            localUsers:[],
             isLoaded:false
         }
         this.getUsers = this.getUsers.bind(this)
 
     }
      async getUsers(){
-                const user = await firebase.auth().currentUser;
+                const user =  firebase.auth().currentUser;
                 if (user != null) {
-                    const userId = user.uid;
-                    this.setState({user:{displayName:user.displayName,email:user.email,photoURL:user.photoURL,uid:user.uid} })
-                    this.setState({isLoaded:true})
-                    return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-                        console.log("data from the database")
-                        const results = snapshot.val()
-                        console.log(results)
+                    console.log("this.setState",this.state)
+                    this.setState({currentUser:{displayName:user.displayName,email:user.email,photoURL:user.photoURL,uid:user.uid} })
+                    await firebase.database().ref('/users/').once('value').then((snapshot)=> {
+                            snapshot.forEach((childSnapshot)=> {
+                                let value = childSnapshot.val()
+                               this.state.localUsers.push(value)
+                            });
                     });
-        
+                    this.setState({isLoaded:true})
+
                  }
+
                 else{
                     this.props.history.push('/Bookmarks')
                 }
+                console.log("data inside getUsers",this.state.localUsers)        
     }
   
      componentDidMount(){
@@ -37,12 +40,36 @@ class Users extends Component{
        console.log(results)
     }
    render(){
-        return (
-            <React.Fragment>
-            </React.Fragment>
- 
-        );
-      }
+            if(this.state.isLoaded && this.state.localUsers){
+                    return (
+                            <div className="main">
+                                <div className="sub-main-2">
+                                    <div className="container">                        
+                                    <ul>
+                                        <>
+                                        {
+                                            this.state.localUsers.map((item,index)=>
+                                                <li key={index}>
+                                                    <p>User :{index} Email:{item.email}</p>
+                                                </li>
+                                        )}  
+                                        </>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div> 
+                            
+                    );  
+            
+            }
+            else{
+                    return (
+                        <React.Fragment>
+                        </React.Fragment>
+            
+                    );
+                } 
+            }
         
 
 
