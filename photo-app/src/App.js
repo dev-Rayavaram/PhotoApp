@@ -84,32 +84,13 @@ class  App extends Component {
             image:image5,
             liked:0
         }],
-        topLiked:'' 
     }
     this.handle=this.handle.bind(this)
-    this.handleTopRanked = this.handleTopRanked.bind(this)
   }
   componentDidMount(){
     this.authListener()
   }
-  handleTopRanked(){
-      let max=0;
-      let maxId =0
-      for(let image of this.state.images){
-          if(image.liked>max){
-            maxId = image.id
-            max=image.liked
-          }
-          else{
-          }
-      }
-      let topImageIndex = this.state.images.findIndex(x=> x.id === maxId);
-      if(topImageIndex>=0){
-          let topImage = this.state.images[topImageIndex]
-          this.setState({topLiked:topImage.image})
-  
-      }
-    }
+  //https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
   //calling method in setState is to handle async setState results
   //https://www.freecodecamp.org/news/get-pro-with-react-setstate-in-10-minutes-d38251d1c781/
   //handle for like unlike by comparing input2, 
@@ -118,13 +99,13 @@ class  App extends Component {
   //fixed setting state of an array element by following instructions from stackoverflow
 //https://stackoverflow.com/questions/29537299/react-how-to-update-state-item1-in-state-using-setstate
 
-  handle=(index,input2)=>{
+   handle=(index,input2)=>{
     //console.log("handle before change",this.state.images)
 
       let value;
      if(input2===1){
-       console.log("index is ",index)
-       console.log("this.state ",this.state)
+      // console.log("index is ",index)
+      // console.log("this.state ",this.state)
 
       value= this.state.images[index].liked+1;
      }
@@ -133,15 +114,15 @@ class  App extends Component {
       value=(value<0)?0:value
      }
       let newObject= {id:this.state.images[index].id,image:this.state.images[index].image,liked:value}
+
       this.setState({
           images: [
           ...this.state.images.slice(0,index),newObject,
           ...this.state.images.slice(index+1)
           ]
-      },()=>{this.handleTopRanked()}); 
-    //  console.log("handle changes",this.state.images)
+      },
+      )
      }
-  
   authListener(){
     firebase.auth().onAuthStateChanged((user)=>{
       //console.log(user);
@@ -169,7 +150,7 @@ class  App extends Component {
                   <nav> 
                       <ul className="menu">
                       <li>
-                        <Link to={{ pathname: '/', state:{topLiked:this.state.topLiked }} }>User Profile </Link>
+                        <Link to={{ pathname: '/', state:{images:this.state.images }} }>User Profile </Link>
                       </li>
                        <li>
                         <Link  to={{ pathname: '/Bookmarks', state:{images:this.state.images },props:{prop:this.handle} }} >Bookmarks</Link>
@@ -187,7 +168,7 @@ class  App extends Component {
                       </ul>
                   </nav>
                   <Switch>
-                      <Route exact path="/" component={UserProfile}>          
+                      <Route exact path="/" component= {UserProfile}> 
                       </Route> 
                        <Route exact path = "/Bookmarks" component= {() => <Bookmarks handle={this.handle} state={this.state.images }/>}>
                       </Route>
