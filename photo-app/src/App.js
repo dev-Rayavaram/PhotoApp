@@ -15,7 +15,22 @@ import image4 from './images/4.png';
 import image5 from './images/5.png';
 
 import {Route,Switch,Link,BrowserRouter as Router} from 'react-router-dom'
+/*
+  App.js uses firebase authentication ,and congig.js has required configuration for configuration
+    pseudocode for the config.js
+      initialize firebase using required keys ,appId, auth domain for firebase authentication
+      initialize storage bucket location for firebase storage service
+      initialize database url for firebase as a database service 
+      export firebase
 
+    pseudocode for App.js
+
+  create App as a stateful component
+    initialize user, images topLiked variables
+    bind handle,handleTopRanked methods to this
+    implement lifecycle method componentDidMount
+ 
+*/
 
 class  App extends Component {
   constructor(props){
