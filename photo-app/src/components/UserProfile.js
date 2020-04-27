@@ -14,7 +14,7 @@ class UserProfile extends Component{
                 email:'',
                 photoURL:defaultImage
             },
-            topLikedPicture:'',
+            likedList:[],
             isLoaded:false 
         }
         this.getProfile = this.getProfile.bind(this)
@@ -22,16 +22,22 @@ class UserProfile extends Component{
         this.handleNameChange = this.handleNameChange.bind(this)
         this.handleEmailChange = this.handleEmailChange.bind(this)
 
-    }
+    }     
+ 
     async componentDidMount(){
-        console.log("inside component UserProfile didmount")
-        await this.getProfile()
-       // console.log("this.state.topLikedPicture",this.state.topLikedPicture)
+       // console.log("inside component UserProfile didmount")
+        await this.getProfile();
+        if(this.props.location.state.images){ 
+            this.props.location.state.images.sort((a,b)=>(a.liked<b.liked)?1:-1)
+            this.props.location.state.images.map((item)=>this.state.likedList.push(item))
+
+        }
+        this.setState({ state: this.state });
     }
 
     handleNameChange(event){
         event.preventDefault();
-        console.log(this.state)
+      //  console.log(this.state)
         this.setState({user:{displayName:event.target.value,email:this.state.user.email,photoURL:this.state.user.photoURL,uid:this.state.user.uid} });
       }
       handleEmailChange(event){
@@ -44,19 +50,13 @@ class UserProfile extends Component{
         if (user != null) {
 
             this.setState({user:{displayName:user.displayName,email:user.email,photoURL:user.photoURL,uid:user.uid} })
-            this.setState({isLoaded:true})
-            if(this.props.location.state !==null && this.props.location.state!==undefined){   
-                this.setState({topLikedPicture:this.props.location.state.topLiked})
-    
-            }
-            
+            this.setState({isLoaded:true})         
         }
         else{
             this.props.history.push('/Bookmarks')
         }
-       // console.log("this.state.user is:", this.state.user)
     }
-    updateProfile(e){
+     updateProfile(e){
         e.preventDefault();
         var user = firebase.auth().currentUser;
        // console.log("inside updateProfile")
@@ -69,7 +69,8 @@ class UserProfile extends Component{
           });
     }
     render(){
-        if(this.state.isLoaded===true && this.state.user!==null && this.state.user!== undefined){
+        console.log("this.state.likedList",this.state.likedList)
+         if(this.state.isLoaded===true && this.state.user!==null && this.state.user!== undefined){
             let imageUrl =(this.state.user.photoURL===null)?defaultImage:this.state.user.photoURL;
           //  console.log("this.state.images is ",this.state.images)
             return (
@@ -78,11 +79,7 @@ class UserProfile extends Component{
                         <div className="image">
                             <img src={imageUrl} alt="profile" width="150px" height="150px"></img>
                         </div>
-                        <h3>Your most liked picture is</h3>
-                        <div className="image">
-                            <img src={(this.state.topLikedPicture)?this.state.topLikedPicture:imageUrl} alt="profile" width="150px" height="150px"></img>
-                        </div>                       
-                        <div className="container">
+                       <div className="container">
                             <div className="sub-container-1">
                                     <form>
                                         <h5 hidden>UID :{(this.state.user.uid)?this.state.user.uid:'0'}</h5>
@@ -99,27 +96,20 @@ class UserProfile extends Component{
                                             <Button variant="primary" onClick={this.updateProfile}>Update Profile</Button>
                                         </div>
                                     </form>
+                                    <div className="box">
+                                    {
+                                        this.state.likedList?(
+                                            this.state.likedList.map((image,index)=>(
+                                                <div className="image">
+                                                <img src={image.image} alt="profile" width="200px" height="200px"></img>
+                                                </div>
+
+                                            ) 
+                                        )):<></>
+                                    }
+                                    </div>
                             </div>
-                      </div>
-                      <div className="sub-container-2">
-                                {
-                                    this.props.images?(
-                                    this.props.images.map((image,index)=>{return(
-                                        <React.Fragment>
-                                            <>
-                                            <caption>Likes:{image.liked}</caption>
-
-                                                <img src={image.image} alt="main" style={{width:"250px",height:"250px"}} ></img>
-                                            </>
-                                         </React.Fragment>
-                                    )})):
-                                    <React.Fragment>                                        
-                                    </React.Fragment>
- 
-                                }
-                                    
-                             </div>
-
+                       </div>
                 </div>
             )
 
