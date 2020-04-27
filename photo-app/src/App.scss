@@ -73,7 +73,6 @@ image{
   margin-top: 0%;
   margin-left: 0%;
   display:grid;
-  border: 2px solid black;
   @include media("(max-width: 767px)"){
       width: 100%;
   }
@@ -84,9 +83,16 @@ image{
   }
 }
 .sub-container-1{
+  align-items: center;
   order: 1;
+  .box{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 }
 .sub-container-2{
+  order:2;
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
