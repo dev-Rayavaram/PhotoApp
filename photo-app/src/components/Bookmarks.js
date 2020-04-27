@@ -6,7 +6,24 @@ import React ,{Component} from 'react'
 // import image4 from '../images/4.png';
 // import image5 from '../images/5.png';
 // import { Button } from 'react-bootstrap';
-
+/*
+    pseudocode
+    create stateful component Bookmarks for displaying pictures
+        initialize state
+        bind methods to this
+        implement lifecycle method componentDidMount
+            inside componentDidMount 
+                IF state from props is NOT NULL
+                    set state for image objects
+                    set isLoaded state to true
+        implement lifecycle method render
+            inside render
+                IF state exists and isLoaded is true
+                    display images in a grid
+                    create buttons Like and UnLike
+                    trigger events to parent component on button click (handle is the parent method)
+        export Bookmarks
+    */
 class Bookmarks extends Component{
     constructor(props){
         super(props);
