@@ -2,7 +2,22 @@ import React ,{Component } from 'react';
 import firebase from '../config/fireauth'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
-
+/*
+    create class component Login
+        initialize user state
+        bind handleSubmit,handleSubmit,and handleChange methods to class
+        procedure handleChange
+            get user input 
+            set user state
+        procedure handleSubmit
+            get user state
+            call firebase.auth by passing user information
+            IF login is successful set uid and other user info
+            ELSE alert user to enter correct info or signup
+        procedure handleSignup
+            create user in firebase with email/password
+            get uid and set user state
+*/
 
 class  Login extends Component {
     constructor(props){
@@ -22,7 +37,6 @@ class  Login extends Component {
              (u)=>{
                     console.log(u)
                     console.log("u.uid",u.user.uid)
-
                      firebase.database().ref('/users/' + u.user.uid).set({
                        username: u.user.email,
                        email: u.user.email,
