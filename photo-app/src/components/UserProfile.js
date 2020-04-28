@@ -84,7 +84,7 @@ class UserProfile extends Component{
             this.setState({isLoaded:true})         
         }
         else{
-            this.props.history.push('/Bookmarks')
+            this.props.history.push('/Logout')
         }
     }
      updateProfile(e){
@@ -131,7 +131,7 @@ class UserProfile extends Component{
                                     {
                                         this.state.likedList?(
                                             this.state.likedList.map((image,index)=>(
-                                                <div className="image">
+                                                <div className="image" key={index}>
                                                 <img src={image.image} alt="profile" width="200px" height="200px"></img>
                                                 </div>
 
