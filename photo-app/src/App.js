@@ -46,14 +46,7 @@ import {Route,Switch,Link,BrowserRouter as Router} from 'react-router-dom'
                   increase like by 1, and set liked for corresponding image object
               ELSE input equals 2
                   decrease like by 1, and change liked value for that image object
-          END procedure
-
-        implementation for handleTopRanked method
-            loop all image objects 
-                find object that has maximum liked value
-                    set topLiked state
-        send topLiked to UserProfile component as a prop 
-                    
+          END procedure                    
 */
 
 class  App extends Component {
@@ -123,6 +116,7 @@ class  App extends Component {
       },
       )
      }
+     
   authListener(){
     firebase.auth().onAuthStateChanged((user)=>{
       //console.log(user);
