@@ -125,6 +125,9 @@ image{
     font-size: 25px;
     color: black; font-weight: bold; display: block; width: 150px; float: left; 
   }
+  button{
+    margin:40px;
+  }
 }
 .col-4 {
   width: $container-width/4;
