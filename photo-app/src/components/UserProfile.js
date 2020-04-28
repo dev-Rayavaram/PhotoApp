@@ -2,7 +2,32 @@ import React ,{Component} from 'react'
 import firebase from '../config/fireauth'
 import defaultImage from '../images/default.jpeg'
 import { Button } from 'react-bootstrap';
+/*
+create class component UserProfile
+    initialize user data
+    bind getProfile,updateProfile,handleNameChange and handleEmailChange methods to class
+    implement Lifecycle methods componentDidMount,render
+    Procedure componentDidMount
+        invoke getUserProfile
+        IF state from props is not NULL and props state has images array
+            map through the array and set images state
+                set state to state to force re-render the page
+    procedure getUserProfile
+        get current user from firebase auth
+            IF user exists
+                set state
+            ELSE
+                redirect to Bookmarks as refresh page gets null user data from firebase
+    
 
+
+
+
+
+
+
+
+*/
 class UserProfile extends Component{
     constructor(props){
         super(props)
@@ -30,7 +55,6 @@ class UserProfile extends Component{
             this.props.location.state.images.sort((a,b)=>(a.liked<b.liked)?1:-1)
             this.props.location.state.images.map((item)=>this.state.likedList.push(item))
             this.setState({ state: this.state });
-
         }
     }
 
