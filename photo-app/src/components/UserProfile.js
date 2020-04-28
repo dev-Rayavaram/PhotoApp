@@ -25,14 +25,13 @@ class UserProfile extends Component{
     }     
  
     async componentDidMount(){
-       // console.log("inside component UserProfile didmount")
         await this.getProfile();
-        if(this.props.location.state && this.props.location.state.images){ 
+         if(this.props.location.state && this.props.location.state.images){ 
             this.props.location.state.images.sort((a,b)=>(a.liked<b.liked)?1:-1)
             this.props.location.state.images.map((item)=>this.state.likedList.push(item))
+            this.setState({ state: this.state });
 
         }
-        this.setState({ state: this.state });
     }
 
     handleNameChange(event){
@@ -69,7 +68,7 @@ class UserProfile extends Component{
           });
     }
     render(){
-        console.log("this.state.likedList",this.state.likedList)
+     //   console.log("this.state.likedList",this.state.likedList)
          if(this.state.isLoaded===true && this.state.user!==null && this.state.user!== undefined){
             let imageUrl =(this.state.user.photoURL===null)?defaultImage:this.state.user.photoURL;
           //  console.log("this.state.images is ",this.state.images)
