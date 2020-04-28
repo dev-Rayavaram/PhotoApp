@@ -1,7 +1,7 @@
 # React Photo App
 
 ## Wireframe
-![wireframe](./wireframe/wireframe-photoApp.png)
+![wireframe](../wireframe/wireframe-photoApp2.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

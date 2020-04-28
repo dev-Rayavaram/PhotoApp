@@ -1,8 +1,17 @@
 # React Photo App
 
-
+## Wireframe
+![wireframe](./wireframe/wireframe-photoApp2.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+### Application Instructions:
+1.  Enter Email address and password
+2.  If already registered click Login
+3.  If user is not registered click on Signup
+4.  Bookmarks page will be displayed with pictures. Click on like or unlike button for pictures.
+5.  Click on User Profile tab. User profile data will be displayed, and we can edit displayName and update profile on server.On the same page, pictures will be displayed in sorting order(from most likes to least likes)   
+6.  Click on Users tab to check users stored in firebase database.
 
 ## Available Scripts
 
