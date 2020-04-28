@@ -34,7 +34,7 @@ create class component UserProfile
             render user data in form
         IF likedList exists(this is the list sorted by liked field) 
             display each picture in a grid   
-
+    export UserProfile
 */
 class UserProfile extends Component{
     constructor(props){
