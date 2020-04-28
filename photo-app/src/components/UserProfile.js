@@ -20,11 +20,17 @@ create class component UserProfile
                 redirect to Bookmarks as refresh page gets null user data from firebase
     procedure handleNameChange
         get event target value
-            set user state with new value for name by keeping existing values for other fields
+            set user state with new value for name and keeping existing values for other fields
      procedure handleEmailChange
         get event target value
-            set user state with new value for email by keeping existing values for other fields
-            
+            set user state with new value for email and keeping existing values for other fields
+    procedure updateProfile
+        get current user from firebase auth
+        get uid for current user
+        get user displayName from state 
+        call updatePriofile on firebase with required data(we can only update displayName in this method)
+        
+
 */
 class UserProfile extends Component{
     constructor(props){
