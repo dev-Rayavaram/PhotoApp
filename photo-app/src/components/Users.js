@@ -1,6 +1,29 @@
 import React ,{Component} from 'react'
 import firebase from '../config/fireauth'
+/*
+create class component User
+    initialize state
+    bind getUsers method
+implement getUsers and lifecycle methods componentDidMount,render
+    procedure componentDidMount
+        invoke getUsers
+    procedure getUsers
+        get current user from firebase
+         IF user exists
+            set currentUser state with data from firebase(currently we are not using that data in this page)
+            get root reference for firebase database("users directory")
+            call once on firebase root reference(once will get total snapshot)
+            get child nodes by using forEach on snapshot(firebase database stores data in tree structure)
+            get value on each child node 
+            set localUsers array with each value
+        ELSE
+            redirect to Bookmarks as page refresh on Users returns blank page
+    procedure render
+        IF user data is loaded and user data is not empty
+            render data
+export  Users
 
+*/
 
 class Users extends Component{
     constructor(props){
@@ -35,9 +58,9 @@ class Users extends Component{
     }
   
      componentDidMount(){
-       const results=  this.getUsers();
-       console.log("results in componentDidMount")
-       console.log(results)
+        this.getUsers();
+     //  console.log("results in componentDidMount")
+      // console.log(results)
     }
    render(){
             if(this.state.isLoaded && this.state.localUsers){
