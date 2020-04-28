@@ -40,7 +40,8 @@ import {Route,Switch,Link,BrowserRouter as Router} from 'react-router-dom'
         ELSE
           redirect to login page  
           
-    implementation for handle a button handler for child component
+    implementation for handle a button handler for child component(these medthods allow multiple clicks 
+        as current data is not persistent across multiple login accounts)
           procedure handle
               IF input equals 1 
                   increase like by 1, and set liked for corresponding image object
