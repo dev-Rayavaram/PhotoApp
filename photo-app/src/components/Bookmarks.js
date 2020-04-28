@@ -1,11 +1,5 @@
 import React ,{Component} from 'react'
 
-// import image1 from '../images/1.png';
-// import image2 from '../images/2.jpg';
-// import image3 from '../images/3.png';
-// import image4 from '../images/4.png';
-// import image5 from '../images/5.png';
-// import { Button } from 'react-bootstrap';
 /*
     pseudocode
     create stateful component Bookmarks for displaying pictures
@@ -22,6 +16,10 @@ import React ,{Component} from 'react'
                     display images in a grid
                     create buttons Like and UnLike
                     trigger events to parent component on button click (handle is the parent method)
+        implement event handlers for Like and unLike buttons
+            inside button handlers
+                get event.target.value
+                trigger event to parent component
         export Bookmarks
     */
 class Bookmarks extends Component{
