@@ -29,7 +29,11 @@ create class component UserProfile
         get uid for current user
         get user displayName from state 
         call updatePriofile on firebase with required data(we can only update displayName in this method)
-        
+    procedure render
+        IF user state exists
+            render user data in form
+        IF likedList exists(this is the list sorted by liked field) 
+            display each picture in a grid   
 
 */
 class UserProfile extends Component{
