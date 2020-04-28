@@ -18,15 +18,13 @@ create class component UserProfile
                 set state
             ELSE
                 redirect to Bookmarks as refresh page gets null user data from firebase
-    
-
-
-
-
-
-
-
-
+    procedure handleNameChange
+        get event target value
+            set user state with new value for name by keeping existing values for other fields
+     procedure handleEmailChange
+        get event target value
+            set user state with new value for email by keeping existing values for other fields
+            
 */
 class UserProfile extends Component{
     constructor(props){
