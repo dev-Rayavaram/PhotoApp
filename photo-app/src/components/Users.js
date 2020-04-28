@@ -39,7 +39,7 @@ class Users extends Component{
      async getUsers(){
                 const user =  firebase.auth().currentUser;
                 if (user != null) {
-                    console.log("this.setState",this.state)
+                  //  console.log("this.setState",this.state)
                     this.setState({currentUser:{displayName:user.displayName,email:user.email,photoURL:user.photoURL,uid:user.uid} })
                     await firebase.database().ref('/users/').once('value').then((snapshot)=> {
                             snapshot.forEach((childSnapshot)=> {
@@ -54,7 +54,7 @@ class Users extends Component{
                 else{
                     this.props.history.push('/Bookmarks')
                 }
-                console.log("data inside getUsers",this.state.localUsers)        
+              //  console.log("data inside getUsers",this.state.localUsers)        
     }
   
      componentDidMount(){
